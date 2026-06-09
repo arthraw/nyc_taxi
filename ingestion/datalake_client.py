@@ -10,13 +10,15 @@ class DataLakeClient:
             raise ValueError("File path cannot be empty.")
         
         domain_name = file.split('/')[-2] if file.endswith('/') else file.split('/')[-1]
+        print(f"Determined domain name: {domain_name} from file: {file}")
         match domain_name:
             case "yellow_trip":
                 remote_file_path = f"/Volumes/nyc_taxi/transient/transient_vol/yellow_trip/{file}"
             case "green_trip":
                 remote_file_path = f"/Volumes/nyc_taxi/transient/transient_vol/green_trip/{file}"
-            case _:
-                remote_file_path = f"/Volumes/nyc_taxi/transient/transient_vol/yellow_trip/{file}"    
+            case "lookup":
+                remote_file_path = f"/Volumes/nyc_taxi/transient/transient_vol/taxi_zone/{file}"    
+
         
         return remote_file_path
 
